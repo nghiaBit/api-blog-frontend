@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
-import Posts from './Posts';
-import PostList from './PostList';
+import Posts from './Posts.jsx';
+import PostList from './PostList.jsx';
+import Post from './Post.jsx'
 function Home() {
   return <h3>Trang chu</h3>;
 }
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/posts" element={<Posts />}>
           <Route index element={<PostList />} />
+          <Route path=":slug" element={<Post />} />
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotMatch />} />

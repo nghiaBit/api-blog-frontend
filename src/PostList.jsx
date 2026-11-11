@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 export default function PostList() {
   const [dl, setDl] = useState([]);
@@ -8,13 +9,8 @@ export default function PostList() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:3000/api/posts');
-        if (!Array.isArray(res.data)) {
-          throw new Error(
-            'Backend trả về không phải danh sách: ' +
-              JSON.stringify(res.data).slice(0, 100)
-          );
-        }
+        const res = await axios.get('https://apiblogbackend-4dnj--8080--0df13572.local-credentialless.webcontainer.io/api/posts');
+        
         setDl(res.data);
       } catch (error) {
         console.error('Chi tiết lỗi axios:', error);
@@ -31,7 +27,7 @@ export default function PostList() {
     <div>
       <ul>
         {dl.map((post) => (
-          <li key={post.slug}>{post.title}</li>
+          <Link to={`/api/posts/${slug}`}><li key={post.slug}>{post.title}</li></Link>
         ))}
       </ul>
     </div>
